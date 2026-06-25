@@ -47,7 +47,8 @@ Brauzerda oching: **http://localhost:8000**
    - **Name**: `ankitan`
    - **Runtime**: `Python 3`
    - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app`
+   - **Start Command**: `gunicorn -w 1 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --timeout 300 main:app`
+   - **Environment** bo'limida: `GEMINI_API_KEY` = (sizning Gemini API kalitingiz)
 5. **"Create Web Service"** tugmasini bosing
 
 5-10 daqiqada sayt tayyor bo'ladi.

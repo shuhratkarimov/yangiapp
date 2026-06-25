@@ -39,7 +39,7 @@ templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 # ║  API KALITNI SHU YERGA QOYING                                ║
 # ║  https://aistudio.google.com dan oling                       ║
 # ╚═══════════════════════════════════════════════════════════════╝
-API_KEY = os.environ.get("AIzaSyB8DxDsFQHigubAx0_ij2SCztMT388DBBM", "AIzaSyB8DxDsFQHigubAx0_ij2SCztMT388DBBM")
+API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 MODEL_NAME = "gemini-2.0-flash"
 
@@ -132,7 +132,7 @@ def call_gemini_for_terms(text_chunk, src, tgt, mono=False):
         },
         "generationConfig": {
             "temperature": 0.1,
-            "maxOutputTokens": 65536,
+            "maxOutputTokens": 8192,
         },
     }
 
@@ -359,6 +359,12 @@ async def handle_upload(
 
     if not page_texts:
         return JSONResponse({"error": "PDF dan matn topilmadi"}, status_code=400)
+
+    if not API_KEY:
+        return JSONResponse(
+            {"error": "Server API kaliti sozlanmagan. Render'da GEMINI_API_KEY env o'zgaruvchisini qo'shing."},
+            status_code=500,
+        )
 
     src = LANG_NAMES.get(source_lang, source_lang)
     tgt = LANG_NAMES.get(target_lang, target_lang)
