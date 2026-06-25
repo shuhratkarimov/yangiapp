@@ -331,7 +331,7 @@ def generate_output_files(terms, session_id, deck_name, pdf_name, start_page, en
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.post("/api/generate")
