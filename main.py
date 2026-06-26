@@ -41,7 +41,7 @@ templates = Jinja2Templates(directory=os.path.join(BASE_DIR, "templates"))
 # ╚═══════════════════════════════════════════════════════════════╝
 API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
-MODEL_NAME = "gemini-2.0-flash"
+MODEL_NAME = "gemini-2.5-flash"
 
 LANG_NAMES = {
     "en": "English", "ru": "Russian", "uz": "Uzbek",
